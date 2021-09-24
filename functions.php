@@ -1,5 +1,6 @@
 <?php
 
+//Template de inicio: thumbnails, titulo de pagina y menus
 function init_template() {
     add_theme_support('post-thumnails');
     add_theme_support('title-tag');
@@ -14,7 +15,7 @@ function init_template() {
 
 add_action('after_setup_theme', 'init_template');
 
-
+//Assets
 function assets() {
     //Style libraries
     wp_register_style('bootstrap', 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css', '', '5.1.1', 'all');
@@ -31,3 +32,20 @@ function assets() {
 }
 
 add_action('wp_enqueue_scripts', 'assets');
+
+//Sidebar y widgets
+function sidebar() {
+    register_sidebar(
+        array(
+            'name' => 'pie de pagina',
+            'id' => 'footer',
+            'description' => 'zona de widgets para pie de pagina',
+            'before_title' => '<p>',
+            'after_title' => '</p>',
+            'before_widget' => '<div id="%1$s" class="%2$s">',
+            'after_widget' => '</div>'
+        )
+    );
+}
+
+add_action('widgets_init', 'sidebar');
