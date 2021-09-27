@@ -49,3 +49,29 @@ function sidebar() {
 }
 
 add_action('widgets_init', 'sidebar');
+
+//Custom post type: productos_type
+function productos_type() {
+    $labels = [
+        'name' => 'Productos',
+        'singular_name' => 'Producto',
+        'menu_name' => 'Productos'
+    ];
+    $args = [
+        'label' => 'Productos',
+        'description' => 'Productos de platzi',
+        'labels' => $labels,
+        'supports' => ['title', 'editor', 'thumbnail', 'revisions'],
+        'public' => true,
+        'show_in_menu' => true,
+        'menu_position' => 5,
+        'menu-icon' => 'dashicons-cart',
+        'can_export' => true,
+        'publicly_queryable' => true,
+        'rewrite' => true,
+        'show_in_rest' => true,
+    ];
+    register_post_type('producto', $args);
+};
+
+add_action('init', 'productos_type');
